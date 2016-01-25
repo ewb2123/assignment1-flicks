@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:movieViewer.xcodeproj">
+      location = "self:/Users/elijahbullard/Desktop/Assignment_1/movieViewer/Flicks.xcodeproj">
    </FileRef>
 </Workspace>
