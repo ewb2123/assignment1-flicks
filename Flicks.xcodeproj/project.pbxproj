@@ -142,6 +142,7 @@
 				TargetAttributes = {
 					FD87D84B1C56B46D00E485FD = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4S4EQAB8LV;
 					};
 				};
 			};
@@ -345,10 +346,13 @@
 			baseConfigurationReference = AB02AE93FCC5D4E6675CFD08 /* Pods-Flicks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = movieViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = codePath.com.movieViewer;
 				PRODUCT_NAME = Flicks;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -357,10 +361,13 @@
 			baseConfigurationReference = 0F602BBBE33E5F84A93AC67B /* Pods-Flicks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = movieViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = codePath.com.movieViewer;
 				PRODUCT_NAME = Flicks;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
