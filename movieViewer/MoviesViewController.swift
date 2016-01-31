@@ -19,6 +19,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
     
+    //hide status bar
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +32,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         networkErrorView.viewWithTag(0)!.hidden = true
         NetworkErrorViewText.text = "Network Error"
+        
+        tableView.backgroundColor = UIColor.blackColor()
         
         
         // Initialize a UIRefreshControl

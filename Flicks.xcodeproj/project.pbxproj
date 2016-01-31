@@ -353,6 +353,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = codePath.com.movieViewer;
 				PRODUCT_NAME = Flicks;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -368,6 +369,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = codePath.com.movieViewer;
 				PRODUCT_NAME = Flicks;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
