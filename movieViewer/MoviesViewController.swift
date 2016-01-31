@@ -12,6 +12,8 @@ import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var networkErrorView: UIView!
+    @IBOutlet weak var NetworkErrorViewText: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [NSDictionary]?
@@ -21,9 +23,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableView.delegate = self
         tableView.dataSource = self
+        networkErrorView.viewWithTag(0)!.hidden = true
+        NetworkErrorViewText.text = "Network Error"
         
         
         // Initialize a UIRefreshControl
@@ -114,15 +117,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 else {
                     print("There was a network error")
-                } //I included this else statement so it'll pop up if there is a network error -Mariella
+                    self.networkErrorView.viewWithTag(0)!.hidden = false
+                }
         });
         task.resume()
     }
     
     func didRefresh() {
+        self.networkErrorView.viewWithTag(0)!.hidden = true
         networkRequest()
     }
-    
+
     /*
     // MARK: - Navigation
     
