@@ -10,11 +10,11 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var NetworkErrorViewText: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
@@ -28,18 +28,18 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         networkErrorView.viewWithTag(0)!.hidden = true
         NetworkErrorViewText.text = "Network Error"
         
-        tableView.backgroundColor = UIColor.blackColor()
+        collectionView.backgroundColor = UIColor.blackColor()
         
         
         // Initialize a UIRefreshControl
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "didRefresh", forControlEvents: .ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
         
         networkRequest() //declaring the network request function
         
@@ -51,16 +51,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let movies = movies {
-            return movies.count - 1
+            return movies.count
         } else {
             return 0
         }
+        
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
         let movie = movies![indexPath.row]
         let title = movie["title"] as! String
@@ -70,9 +71,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let imageUrl = NSURL(string: baseUrl + posterPath)
         
         
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        cell.posterView.setImageWithURL(imageUrl!)
+        //cell.titleLabel.text = title
+        //cell.overviewLabel.text = overview
+        cell.posterImage.setImageWithURL(imageUrl!)
         
         print("row \(indexPath.row)")
         return cell
@@ -115,7 +116,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
                             print(self.movies![1]["title"])
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                             
                             // Tell the refreshControl to stop spinning
                             self.refreshControl.endRefreshing()

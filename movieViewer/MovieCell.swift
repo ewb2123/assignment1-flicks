@@ -2,28 +2,13 @@
 //  MovieCell.swift
 //  Flicks
 //
-//  Created by Elijah Bullard on 1/25/16.
+//  Created by Elijah Bullard on 2/1/16.
 //  Copyright © 2016 Elijah Bullard. All rights reserved.
 //
 
 import UIKit
 
-class MovieCell: UITableViewCell {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var overviewLabel: UILabel!
-    @IBOutlet weak var posterView: UIImageView!
+class MovieCell: UICollectionViewCell {
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    @IBOutlet weak var posterImage: UIImageView!
 }
