@@ -14,6 +14,7 @@
 		FD87D8551C56B46D00E485FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD87D8531C56B46D00E485FD /* Main.storyboard */; };
 		FD87D8571C56B46D00E485FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD87D8561C56B46D00E485FD /* Assets.xcassets */; };
 		FD87D85A1C56B46D00E485FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD87D8581C56B46D00E485FD /* LaunchScreen.storyboard */; };
+		FD9006C41C5FF1200001E924 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9006C31C5FF1200001E924 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FD87D8561C56B46D00E485FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD87D8591C56B46D00E485FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD87D85B1C56B46D00E485FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD9006C31C5FF1200001E924 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				FD6DEC9B1C5701EA00ED8E60 /* MoviesViewController.swift */,
+				FD9006C31C5FF1200001E924 /* DetailViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				FD87D8501C56B46D00E485FD /* AppDelegate.swift in Sources */,
 				FD6DEC9C1C5701EA00ED8E60 /* MoviesViewController.swift in Sources */,
 				FD5C7DD81C5F3B0A00CD03C4 /* MovieCell.swift in Sources */,
+				FD9006C41C5FF1200001E924 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
