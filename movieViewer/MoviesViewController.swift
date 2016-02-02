@@ -10,7 +10,7 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MoviesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var NetworkErrorViewText: UILabel!
@@ -18,6 +18,12 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
+    var filteredMovies: [NSDictionary]!
+    
+    
+    
+    //keep UISearchbar property
+    lazy   var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
     
     //hide status bar
     override func prefersStatusBarHidden() -> Bool {
@@ -32,6 +38,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
         networkErrorView.viewWithTag(0)!.hidden = true
         
         //make network error view visible over collection view
@@ -39,6 +46,11 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         NetworkErrorViewText.text = "Network Error"
         
         collectionView.backgroundColor = UIColor.blackColor()
+        
+        //implement searchBar
+        searchBar.placeholder = "Search by Title"
+        var leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         
         // Initialize a UIRefreshControl
@@ -57,7 +69,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let movies = movies {
+        if let movies = filteredMovies {
             return movies.count
         } else {
             return 0
@@ -65,12 +77,20 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
+            return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+        })
+        
+        self.collectionView.reloadData()
+    }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
-        let movie = movies![indexPath.row]
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
+        let movie = filteredMovies![indexPath.row]
+        //let title = movie["title"] as! String
+        //let overview = movie["overview"] as! String
         if let posterPath = movie["poster_path"] as? String {
             
         
@@ -123,6 +143,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
                             //print("response: \(responseDictionary)")
                             
                             self.movies = responseDictionary["results"] as? [NSDictionary]
+                            self.filteredMovies = self.movies
                             print(self.movies![1]["title"])
                             self.collectionView.reloadData()
                             
@@ -144,6 +165,17 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         networkRequest()
     }
 
+    //Shows cancel button when user begins typing in search bar
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    //Removes keyboard when user taps cancel
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
     
     // MARK: - Navigation
     

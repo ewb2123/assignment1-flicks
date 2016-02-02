@@ -16,6 +16,10 @@ class DetailViewController: UIViewController {
     
     var movie: NSDictionary!
     
+    //hide status bar
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
