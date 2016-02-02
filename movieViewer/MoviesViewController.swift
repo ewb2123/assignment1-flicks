@@ -25,12 +25,17 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
         networkErrorView.viewWithTag(0)!.hidden = true
+        
+        //make network error view visible over collection view
+        view.bringSubviewToFront(networkErrorView)
         NetworkErrorViewText.text = "Network Error"
         
         collectionView.backgroundColor = UIColor.blackColor()
