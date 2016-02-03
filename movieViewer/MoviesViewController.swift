@@ -23,6 +23,8 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     
+    
+    
     //keep UISearchbar property
     lazy   var searchBar:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
     
@@ -47,6 +49,7 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         NetworkErrorViewText.text = "Network Error"
         
         collectionView.backgroundColor = UIColor.blackColor()
+        
         
         //implement searchBar
         searchBar.placeholder = "Search by Title"
@@ -88,7 +91,8 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-        
+        //disallow multiple cells from being selected at once
+        collectionView.allowsMultipleSelection = false
         let movie = filteredMovies![indexPath.row]
         //let title = movie["title"] as! String
         //let overview = movie["overview"] as! String
@@ -102,11 +106,27 @@ class MoviesViewController: UIViewController, UICollectionViewDataSource, UIColl
         //cell.titleLabel.text = title
         //cell.overviewLabel.text = overview
         cell.posterImage.setImageWithURL(imageUrl!)
-        
         print("row \(indexPath.row)")
         }
         return cell
     }
+    
+    //set collection view cell selection action
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        cell?.layer.borderColor = .None
+        cell!.layer.borderWidth = 2.0
+        cell!.layer.borderColor = UIColor.whiteColor().CGColor
+
+    }
+    
+    //set collection view cell deselection action
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        cell?.layer.borderColor = .None
+        cell!.layer.borderWidth = 0
+    }
+
     
     // Makes a network request to get updated data
     // Updates the tableView with the new data
